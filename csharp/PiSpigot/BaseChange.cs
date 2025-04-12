@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace PiSpigot
+﻿namespace PiSpigot
 {
     internal class BaseChange : Spigot<int>
     {

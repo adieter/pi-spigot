@@ -1,33 +1,17 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
-
-func print(a ...any) (n int, err error)   { return fmt.Print(a...) }
-func println(a ...any) (n int, err error) { return fmt.Println(a...) }
-func debug(debug bool, a ...any) (n int, err error) {
-	if debug {
-		return fmt.Println(a...)
-	}
-	return 0, nil
-}
-func collate(c chan int) string {
-	var res string = ""
-	for x, ok := <-c; ok; x, ok = <-c {
-		res += strconv.Itoa(x)
-	}
-	return res
-}
+// import (
+// 	"fmt"
+// 	"strconv"
+// )
 
 func rabinowitzWagon(n int) chan int {
 	c := make(chan int)
 	go func() {
-		var len = (10 * n) / 3;
+		var len = (10 * n) / 3
 		a := make([]int, len)
 		for j := 0; j < len; j++ {
-			a[j] = 2;
+			a[j] = 2
 		}
 		var nines = 0
 		var predigit = 0
@@ -65,10 +49,4 @@ func rabinowitzWagon(n int) chan int {
 	}()
 	<-c // skip leading zero of original algorithm
 	return c
-}
-
-func main() {
-	var N int = 45
-	c := rabinowitzWagon(N)
-	print(collate(c))
 }
